@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Register - ShareStudy</title>
+
+    <link rel="stylesheet" href="../08.Css/style.css?v=20261019-login-header">
+
+</head>
+
+<body class="register-page">
+
+    <!-- Header -->
+
+    <header class="site-header">
+        <a class="site-logo" href="../01.Home/index.html" aria-label="ShareStudy home">
+            <img src="../09.Images/logo.png" width="80" height="80" alt="">
+            <span>ShareStudy</span>
+        </a>
+    </header>
+
+    <!-- Main Content -->
+
+    <main>
+
+        <section aria-labelledby="create-account-heading">
+
+            <h2 id="create-account-heading">Create an Account</h2>
+
+            <form action="../11.Backend/register.php" method="post">
+                <p>
+
+                    <label for="fullname">
+                        Full Name:
+                    </label>
+
+                    <input
+                        type="text"
+                        id="fullname"
+                        name="fullname"
+                        autocomplete="name"
+                        required
+                    >
+
+                </p>
+
+
+                <p>
+
+                    <label for="email">
+                        Email Address:
+                    </label>
+
+                    <input
+                        type="email"
+                        id="email"
+                        name="email"
+                        autocomplete="email"
+                        required
+                    >
+
+                </p>
+
+
+                <p>
+
+                    <label for="program">
+                        Program:
+                    </label>
+
+                    <input
+                        type="text"
+                        id="program"
+                        name="program"
+                        required
+                    >
+
+                </p>
+
+
+                <p>
+
+                    <label for="year">
+                        Year of Study:
+                    </label>
+
+                    <select
+                        id="year"
+                        name="year"
+                        required
+                    >
+
+                        <option value="">
+                            Select Year
+                        </option>
+
+                        <option value="year-1">
+                            Year 1
+                        </option>
+
+                        <option value="year-2">
+                            Year 2
+                        </option>
+
+                        <option value="year-3">
+                            Year 3
+                        </option>
+
+                        <option value="year-4">
+                            Year 4
+                        </option>
+
+                    </select>
+
+                </p>
+
+
+                <p>
+
+                    <label for="password">
+                        Password:
+                    </label>
+
+                    <input
+                        type="password"
+                        id="password"
+                        name="password"
+                        autocomplete="new-password"
+                        minlength="8"
+                        required
+                    >
+
+                </p>
+
+
+                <p>
+
+                    <label for="confirm-password">
+                        Confirm Password:
+                    </label>
+
+                    <input
+                        type="password"
+                        id="confirm-password"
+                        name="confirm-password"
+                        autocomplete="new-password"
+                        minlength="8"
+                        required
+                    >
+
+                </p>
+
+
+                <p>
+
+                    <button type="submit">
+                        Register
+                    </button>
+
+                </p>
+
+            </form>
+
+        </section>
+
+
+        <section aria-labelledby="existing-account-heading">
+
+            <h2 id="existing-account-heading">Already Have an Account?</h2>
+
+            <p>
+                Login to your existing ShareStudy account.
+            </p>
+
+            <a href="login.html">
+                Login
+            </a>
+
+        </section>
+
+    </main>
+    <script src="../07.%20Html-Template/10.%20javascript/share.js?v=20261020-premium-paused" defer></script>
+
+</body>
+
+</html>

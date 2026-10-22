@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Admin Login - ShareStudy</title>
+
+    <link rel="stylesheet" href="../08.Css/style.css?v=20261018-footer-icons">
+
+</head>
+
+<body class="login-page">
+
+    <header class="site-header">
+        <a href="../01.Home/index.html" aria-label="ShareStudy home">
+            <img src="../09.Images/logo.png" width="80" height="80" alt="">
+        </a>
+        <nav aria-label="Main navigation">
+            <ul>
+                <li><a href="../01.Home/index.html">Home</a></li>
+                <li><a href="../03.StudentDashboard/dashboard.html">Student Dashboard</a></li>
+                <li><a href="../04.BrowseMaterials/browsematerials.html">Browse Materials</a></li>
+                <li><a href="../06.Admin/admin.html">Admin</a></li>
+                <li><a href="login.html">Login / Register</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Admin Login Container -->
+
+    <main class="login-container">
+
+        <section class="login-card">
+
+
+            <!-- Logo -->
+
+            <img
+                src="../09.Images/logo.png"
+                alt="ShareStudy Logo"
+                class="login-logo"
+            >
+
+
+            <!-- Page Title -->
+
+            <h1>
+                ShareStudy
+            </h1>
+
+            <p class="login-subtitle">
+                Administrator Login
+            </p>
+
+
+            <!-- Login Form -->
+
+            <form action="../11.Backend/login.php" method="post">
+                <input type="hidden" name="account_type" value="admin">
+                <p id="login-status" role="status" aria-live="polite"></p>
+
+                <p>
+
+                    <label for="admin-email">
+                        Admin Email
+                    </label>
+
+                    <input
+                        type="email"
+                        id="admin-email"
+                        name="email"
+                        placeholder="Enter admin email"
+                        required
+                    >
+
+                </p>
+
+
+                <p>
+
+                    <label for="admin-password">
+                        Password
+                    </label>
+
+                    <input
+                        type="password"
+                        id="admin-password"
+                        name="password"
+                        placeholder="Enter password"
+                        required
+                    >
+
+                </p>
+
+
+                <!-- Login Options -->
+
+                <section class="login-options">
+
+                    <p><a href="forgot-password.html">Forgot password?</a></p>
+
+                </section>
+
+
+                <!-- Login Button -->
+
+                <button type="submit">
+                    Login as Admin
+                </button>
+
+            </form>
+
+
+            <!-- Back Links -->
+
+            <p class="register-link">
+
+                <a href="login.html">
+                    Student Login
+                </a>
+
+            </p>
+
+
+            <p class="register-link">
+
+                <a href="../01.Home/index.html">
+                    Back to Home
+                </a>
+
+            </p>
+
+
+        </section>
+
+    </main>
+
+
+    <footer>
+        <section>
+            <img src="../09.Images/logo.png" width="80" height="80" alt="Study Share Logo">
+            <h5>STUDY SHARE</h5>
+            <p>Empowering students through shared knowledge</p>
+        </section>
+        <section>
+            <h5>Quick Links</h5>
+            <a href="../01.Home/index.html">Home</a>
+            <a href="../03.StudentDashboard/dashboard.html">Student Dashboard</a>
+            <a href="../04.BrowseMaterials/browsematerials.html">Browse Material</a>
+            <a href="../12.about us/about.html">About Us</a>
+        </section>
+        <section>
+            <h5>Contact Us</h5>
+            <a href="mailto:ephraimchilombo64@gmail.com">
+                <svg class="footer-link-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="3" y="5" width="18" height="14" rx="2"></rect><path d="m4 7 8 6 8-6"></path></svg>ephraimchilombo64@gmail.com</a>
+            <a href="tel:+260761000673">
+                <svg class="footer-link-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M7 3h3l2 5-2 1.5a14 14 0 0 0 4.5 4.5L16 12l5 2v3a2 2 0 0 1-2 2A16 16 0 0 1 5 5a2 2 0 0 1 2-2Z"></path></svg>+260 761 000 673</a>
+        </section>
+        
+        <section class="footer-bottom">
+            <p>&copy; 2026 ShareStudy. All rights reserved.</p>
+        </section>
+    </footer>
+    <script src="../07.%20Html-Template/10.%20javascript/share.js?v=20261020-premium-paused" defer></script>
+</body>
+
+</html>

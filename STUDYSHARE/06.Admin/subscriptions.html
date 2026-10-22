@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Subscription History - ShareStudy</title>
+    <link rel="stylesheet" href="../08.Css/style.css?v=20261018-footer-icons">
+</head>
+<body>
+    <header>
+        <a href="../01.Home/index.html" aria-label="ShareStudy home">
+            <img src="../09.Images/logo.png" width="80" height="80" alt="">
+        </a>
+        <h1>Subscription History</h1>
+        <nav aria-label="Main navigation">
+            <ul>
+                <li><a href="../01.Home/index.html">Home</a></li>
+                <li><a href="admin.html">Admin Dashboard</a></li>
+                <li><a href="../03.StudentDashboard/profile.html">Profile</a></li>
+                <li><a href="../11.Backend/logout.php">Log out</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section>
+            <h2>Premium subscriptions are paused</h2>
+            <p>All approved materials are free for students. Existing subscription records are retained for historical reference; new subscriptions cannot be started.</p>
+            <div id="database-subscriptions" aria-live="polite">Loading historical subscription records...</div>
+        </section>
+    </main>
+    <script src="../07.%20Html-Template/10.%20javascript/database-connect.js?v=20261020-premium-paused" defer></script>
+</body>
+</html>

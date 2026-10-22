@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload Official Materials - ShareStudy</title>
+    <link rel="stylesheet" href="../08.Css/style.css?v=20261018-footer-icons">
+</head>
+<body>
+    <header class="site-header">
+        <a href="../01.Home/index.html" aria-label="ShareStudy home">
+            <img src="../09.Images/logo.png" width="80" height="80" alt="">
+        </a>
+        <nav aria-label="Main navigation">
+            <ul>
+                <li><a href="../01.Home/index.html">Home</a></li>
+                <li><a href="admin.html">Manage Site</a></li>
+                <li><a href="materials.html">Manage Materials</a></li>
+                <li><a href="../04.BrowseMaterials/browsematerials.html">Browse Materials</a></li>
+                <li><a href="../11.Backend/logout.php">Log out</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <h1>Upload Official Materials</h1>
+        <section>
+            <h2>Material Details</h2>
+            <p>Materials uploaded by an administrator are published immediately.</p>
+            <p id="upload-status" role="status" aria-live="polite" hidden></p>
+            <form action="../11.Backend/upload.php" method="POST" enctype="multipart/form-data">
+                <p>
+                    <label for="material-title">Material Title:</label>
+                    <input type="text" id="material-title" name="material-title" required>
+                </p>
+                <p>
+                    <label for="course">Program:</label>
+                    <select id="course" name="course" required>
+                        <option value="">Select Program</option>
+                        <option value="information-technology">Information Technology</option>
+                    </select>
+                </p>
+                <p>
+                    <label for="year">Year:</label>
+                    <select id="year" name="year" required>
+                        <option value="">Select Year</option>
+                        <option value="year-1">Year 1</option>
+                        <option value="year-2">Year 2</option>
+                        <option value="year-3">Year 3</option>
+                        <option value="year-4">Year 4</option>
+                    </select>
+                </p>
+                <p>
+                    <label for="subject">Course:</label>
+                    <input type="text" id="subject" name="subject" placeholder="e.g., Operating Systems" required>
+                </p>
+                <p>
+                    <label for="material-type">Material Type:</label>
+                    <select id="material-type" name="material-type" required>
+                        <option value="">Select Material Type</option>
+                        <option value="notes">Notes</option>
+                        <option value="past-papers">Past Papers</option>
+                        <option value="assignments">Assignments</option>
+                    </select>
+                </p>
+                <p>
+                    <label for="description">Description:</label>
+                    <textarea id="description" name="description" rows="5"></textarea>
+                </p>
+                <p>
+                    <label for="material-file">Select Material (PDF, DOC, DOCX, PPT, PPTX; max 15 MB):</label>
+                    <input type="file" id="material-file" name="material-file" accept=".pdf,.doc,.docx,.ppt,.pptx" required>
+                </p>
+                <p><button type="submit">Publish Material</button></p>
+            </form>
+        </section>
+        <p><a href="materials.html">Back to Material Management</a></p>
+    </main>
+
+    <footer>
+        <section>
+            <img src="../09.Images/logo.png" width="80" height="80" alt="Study Share Logo">
+            <h5>STUDY SHARE</h5>
+            <p>Empowering students through shared knowledge</p>
+        </section>
+        <section class="footer-bottom"><p>&copy; 2026 ShareStudy. All rights reserved.</p></section>
+    </footer>
+
+    <script>
+        const uploadStatus = document.getElementById('upload-status');
+        const uploadQuery = new URLSearchParams(window.location.search);
+        const uploadError = uploadQuery.get('upload_error');
+        if (uploadError) {
+            uploadStatus.textContent = uploadError;
+            uploadStatus.hidden = false;
+            uploadStatus.setAttribute('role', 'alert');
+        } else if (uploadQuery.get('uploaded') === '1') {
+            uploadStatus.textContent = 'Material uploaded and published for students.';
+            uploadStatus.hidden = false;
+        }
+    </script>
+    <script src="../07.%20Html-Template/10.%20javascript/database-connect.js?v=20261020-premium-paused" defer></script>
+</body>
+</html>

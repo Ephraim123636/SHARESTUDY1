@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Login - ShareStudy</title>
+
+    <link rel="stylesheet" href="../08.Css/style.css?v=20261019-login-header">
+
+</head>
+
+<body class="login-page">
+
+<header class="site-header">
+    <a class="site-logo" href="../01.Home/index.html" aria-label="ShareStudy home">
+        <img src="../09.Images/logo.png" width="80" height="80" alt="">
+        <span>ShareStudy</span>
+    </a>
+</header>
+
+    <!-- Login Container -->
+
+    <main class="login-container">
+
+        <section class="login-card">
+
+
+            <!-- Login Heading -->
+
+            <h1>
+                Welcome back
+            </h1>
+
+            <p class="login-subtitle" id="login-subtitle">
+                Log into your account
+            </p>
+
+
+            <!-- Account Type -->
+
+            <div class="account-type" role="group" aria-label="Choose account type">
+                <button type="button" class="active" aria-pressed="true" data-account-type="student">
+                    Student
+                </button>
+                <button type="button" aria-pressed="false" data-account-type="admin">
+                    Admin
+                </button>
+            </div>
+
+
+            <!-- Login Form -->
+
+            <form action="../11.Backend/login.php" method="post">
+                <input type="hidden" id="account-type" name="account_type" value="student">
+                <p id="login-status" role="status" aria-live="polite"></p>
+
+                <p>
+
+                    <label for="email" id="email-label">
+                        Email Address
+                    </label>
+
+                    <input
+                        type="email"
+                        id="email"
+                        name="email"
+                        placeholder="Email Address"
+                        autocomplete="email"
+                        required
+                    >
+
+                </p>
+
+
+                <p>
+
+                    <label for="password">
+                        Password
+                    </label>
+
+                    <input
+                        type="password"
+                        id="password"
+                        name="password"
+                        placeholder="Password"
+                        required
+                    >
+
+                </p>
+
+
+                <!-- Login Options -->
+
+                <section class="login-options">
+
+                    <p>
+                        <a href="forgot-password.html">Forgot password?</a>
+                    </p>
+
+                </section>
+
+
+                <!-- Login Button -->
+
+                <button type="submit" id="login-button">
+                    Log in as Student
+                </button>
+
+            </form>
+
+
+            <!-- Register -->
+
+            <p class="register-link" id="register-link">
+
+                Don't have an account?
+
+                <a href="register.html">
+                    Register
+                </a>
+
+            </p>
+
+
+        </section>
+
+    </main>
+
+    <script src="../07.%20Html-Template/10.%20javascript/share.js?v=20261020-premium-paused" defer></script>
+
+
+</body>
+
+</html>

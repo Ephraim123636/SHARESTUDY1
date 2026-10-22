@@ -1,0 +1,206 @@
+ <!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Student Dashboard - ShareStudy</title>
+
+    <link rel="stylesheet" href="../08.Css/style.css?v=20261018-footer-icons">
+
+</head>
+
+<body>
+
+    <header class="site-header">
+     <a href="../01.Home/index.html" aria-label="ShareStudy home">
+         <img src="../09.Images/logo.png" width="80" height="80" alt="">
+     </a>
+        <nav aria-label="Main navigation">
+            <ul>
+                <li><a href="../01.Home/index.html">Home</a></li>
+                <li><a href="dashboard.html">Student Dashboard</a></li>
+                <li><a href="../04.BrowseMaterials/browsematerials.html">Browse Materials</a></li>
+                <li><a href="../06.Admin/admin.html">Admin</a></li>
+                <li><a href="../11.Backend/logout.php">Log out</a></li>
+            </ul>
+        </nav>
+    </header>
+
+
+    <!-- Main Content -->
+
+    <main>
+        <h1>Student Dashboard</h1>
+        <section>
+
+            <h2>Welcome to Your Dashboard</h2>
+
+            <p>
+                Manage your study materials and account from your
+                ShareStudy student dashboard.
+            </p>
+
+        </section>
+
+        <section>
+            <h2>Recently Added Materials</h2>
+            <p>Explore the latest materials approved for students.</p>
+            <div id="database-recent-materials" aria-live="polite"></div>
+            <a href="../04.BrowseMaterials/browsematerials.html">Browse all materials</a>
+        </section>
+
+        <section>
+
+            <h2>Student Activities</h2>
+
+            <article>
+
+                <h3>Browse Materials</h3>
+
+                <p>
+                    Find notes, past papers and assignments.
+                </p>
+
+                <a href="../04.BrowseMaterials/browsematerials.html">
+                    Browse Materials
+                </a>
+
+            </article>
+
+
+            <article>
+
+                <h3>Upload Materials</h3>
+
+                <p>
+                    Share your study materials with other students.
+                </p>
+
+                <a href="uploadmaterials.html">
+                    Upload Materials
+                </a>
+
+            </article>
+
+
+            <article>
+
+                <h3>My Downloads</h3>
+
+                <p>
+                    View study materials that you have downloaded.
+                </p>
+
+                <a href="mydownload.html">
+                    View My Downloads
+                </a>
+
+            </article>
+
+
+            <article>
+
+                <h3>My Uploads</h3>
+
+                <p>
+                    View study materials that you have uploaded.
+                </p>
+
+                <a href="myupload.html">
+                    View My Uploads
+                </a>
+
+            </article>
+
+
+            <article>
+
+                <h3>My Profile</h3>
+
+                <p>
+                    View and manage your student profile.
+                </p>
+
+                <a href="profile.html">
+                    View Profile
+                </a>
+
+            </article>
+
+        </section>
+
+    </main>
+
+
+    <footer>
+        <section>
+            <img src="../09.Images/logo.png" width="80" height="80" alt="Study Share Logo">
+            <h5>STUDY SHARE</h5>
+            <p>Empowering students through shared knowledge</p>
+        </section>
+        <section>
+            <h5>Quick Links</h5>
+            <a href="../01.Home/index.html">Home</a>
+            <a href="../03.StudentDashboard/dashboard.html">Student Dashboard</a>
+            <a href="../04.BrowseMaterials/browsematerials.html">Browse Material</a>
+            <a href="../12.about us/about.html">About Us</a>
+        </section>
+        <section>
+            <h5>Contact Us</h5>
+            <a href="mailto:ephraimchilombo64@gmail.com">
+                <svg class="footer-link-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="3" y="5" width="18" height="14" rx="2"></rect><path d="m4 7 8 6 8-6"></path></svg>ephraimchilombo64@gmail.com</a>
+            <a href="tel:+260761000673">
+                <svg class="footer-link-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M7 3h3l2 5-2 1.5a14 14 0 0 0 4.5 4.5L16 12l5 2v3a2 2 0 0 1-2 2A16 16 0 0 1 5 5a2 2 0 0 1 2-2Z"></path></svg>+260 761 000 673</a>
+        </section>
+        
+        <section class="footer-bottom">
+            <p>&copy; 2026 ShareStudy. All rights reserved.</p>
+        </section>
+    </footer>
+
+    <script src="../07.%20Html-Template/10.%20javascript/share.js?v=20261020-premium-paused" defer></script>
+    <script>
+        const recentMaterials = document.getElementById('database-recent-materials');
+        fetch('../11.Backend/api.php?action=recent_materials', { credentials: 'same-origin' })
+            .then((response) => response.json())
+            .then(({ materials }) => {
+                if (!materials?.length) {
+                    recentMaterials.textContent = 'No approved materials are available yet.';
+                    return;
+                }
+
+                materials.forEach((material) => {
+                    const article = document.createElement('article');
+                    const title = document.createElement('h3');
+                    title.textContent = material.title;
+                    article.append(title);
+                    [
+                        `Program: ${material.course}`,
+                        `Course: ${material.subject}`,
+                        `Year: ${material.academic_year || 'Not specified'}`,
+                        `Type: ${material.material_type || 'Not specified'}`,
+                        `Uploaded by: ${material.uploader || 'Unknown'}`
+                    ].forEach((text) => {
+                        const detail = document.createElement('p');
+                        detail.textContent = text;
+                        article.append(detail);
+                    });
+                    const link = document.createElement('a');
+                    link.href = `../04.BrowseMaterials/materialdetails.html?id=${encodeURIComponent(material.id)}`;
+                    link.textContent = 'View material';
+                    article.append(link);
+                    recentMaterials.append(article);
+                });
+            })
+            .catch(() => {
+                recentMaterials.textContent = 'Could not load recent materials.';
+                recentMaterials.setAttribute('role', 'alert');
+            });
+    </script>
+</body>
+
+</html>
