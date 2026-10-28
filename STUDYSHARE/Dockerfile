@@ -13,6 +13,13 @@ ENV PORT=10000
 
 COPY . /var/www/html/
 
+# Allow uploads up to the site's 15 MB limit
+RUN printf "upload_max_filesize=16M\npost_max_size=20M\n" > /usr/local/etc/php/conf.d/uploads.ini
+
+# Apache needs permission to save uploaded files
+RUN mkdir -p /var/www/html/uploads/profile-images \
+    && chown -R www-data:www-data /var/www/html/uploads
+
 EXPOSE 10000
 
 CMD ["apache2-foreground"]
