@@ -1,3 +1,12 @@
+USE studyshare;
+DROP TABLE IF EXISTS `downloads`;
+DROP TABLE IF EXISTS `materials`;
+DROP TABLE IF EXISTS `password_resets`;
+DROP TABLE IF EXISTS `ratings`;
+DROP TABLE IF EXISTS `reports`;
+DROP TABLE IF EXISTS `subscriptions`;
+DROP TABLE IF EXISTS `users`;
+
 -- phpMyAdmin SQL Dump
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
@@ -28,10 +37,11 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `downloads` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `user_id` int(11) NOT NULL,
   `material_id` int(11) NOT NULL,
-  `downloaded_at` timestamp NOT NULL DEFAULT current_timestamp()
+  `downloaded_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -52,7 +62,7 @@ INSERT INTO `downloads` (`id`, `user_id`, `material_id`, `downloaded_at`) VALUES
 --
 
 CREATE TABLE `materials` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `title` varchar(200) NOT NULL,
   `description` text DEFAULT NULL,
   `course` varchar(100) NOT NULL,
@@ -63,7 +73,8 @@ CREATE TABLE `materials` (
   `file_path` varchar(255) NOT NULL,
   `uploaded_by` int(11) NOT NULL,
   `status` enum('pending','approved','rejected') NOT NULL DEFAULT 'pending',
-  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -81,14 +92,15 @@ INSERT INTO `materials` (`id`, `title`, `description`, `course`, `subject`, `aca
 --
 
 CREATE TABLE `password_resets` (
-  `id` bigint(20) UNSIGNED NOT NULL,
+  `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
   `user_id` int(11) DEFAULT NULL,
   `email_hash` char(64) NOT NULL,
   `requester_hash` char(64) NOT NULL,
   `token_hash` char(64) DEFAULT NULL,
   `expires_at` datetime DEFAULT NULL,
   `requested_at` datetime NOT NULL,
-  `used_at` datetime DEFAULT NULL
+  `used_at` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -98,12 +110,13 @@ CREATE TABLE `password_resets` (
 --
 
 CREATE TABLE `ratings` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `user_id` int(11) NOT NULL,
   `material_id` int(11) NOT NULL,
   `rating` tinyint(4) NOT NULL,
   `comment` text DEFAULT NULL,
-  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -120,13 +133,14 @@ INSERT INTO `ratings` (`id`, `user_id`, `material_id`, `rating`, `comment`, `cre
 --
 
 CREATE TABLE `reports` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `reporter_id` int(11) NOT NULL,
   `material_id` int(11) NOT NULL,
   `reason` varchar(150) NOT NULL,
   `details` text DEFAULT NULL,
   `status` enum('pending','reviewed','resolved') NOT NULL DEFAULT 'pending',
-  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -136,7 +150,7 @@ CREATE TABLE `reports` (
 --
 
 CREATE TABLE `subscriptions` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `user_id` int(11) NOT NULL,
   `plan` enum('monthly','semester') NOT NULL,
   `amount` decimal(10,2) NOT NULL,
@@ -146,7 +160,8 @@ CREATE TABLE `subscriptions` (
   `paid_at` datetime DEFAULT NULL,
   `status` enum('pending_payment','active','cancelled') NOT NULL DEFAULT 'pending_payment',
   `expires_at` datetime DEFAULT NULL,
-  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -163,7 +178,7 @@ INSERT INTO `subscriptions` (`id`, `user_id`, `plan`, `amount`, `currency`, `tx_
 --
 
 CREATE TABLE `users` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `full_name` varchar(100) NOT NULL,
   `email` varchar(150) NOT NULL,
   `password_hash` varchar(255) NOT NULL,
@@ -171,7 +186,8 @@ CREATE TABLE `users` (
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `program` varchar(100) DEFAULT NULL,
   `year_of_study` varchar(20) DEFAULT NULL,
-  `profile_photo` varchar(255) DEFAULT NULL
+  `profile_photo` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -193,7 +209,6 @@ INSERT INTO `users` (`id`, `full_name`, `email`, `password_hash`, `role`, `creat
 -- Indexes for table `downloads`
 --
 ALTER TABLE `downloads`
-  ADD PRIMARY KEY (`id`),
   ADD KEY `user_id` (`user_id`),
   ADD KEY `material_id` (`material_id`);
 
@@ -201,14 +216,12 @@ ALTER TABLE `downloads`
 -- Indexes for table `materials`
 --
 ALTER TABLE `materials`
-  ADD PRIMARY KEY (`id`),
   ADD KEY `uploaded_by` (`uploaded_by`);
 
 --
 -- Indexes for table `password_resets`
 --
 ALTER TABLE `password_resets`
-  ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `token_hash` (`token_hash`),
   ADD KEY `idx_password_resets_email_request` (`email_hash`,`requested_at`),
   ADD KEY `idx_password_resets_requester` (`requester_hash`,`requested_at`),
@@ -218,7 +231,6 @@ ALTER TABLE `password_resets`
 -- Indexes for table `ratings`
 --
 ALTER TABLE `ratings`
-  ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `user_id` (`user_id`,`material_id`),
   ADD KEY `material_id` (`material_id`);
 
@@ -226,7 +238,6 @@ ALTER TABLE `ratings`
 -- Indexes for table `reports`
 --
 ALTER TABLE `reports`
-  ADD PRIMARY KEY (`id`),
   ADD KEY `reporter_id` (`reporter_id`),
   ADD KEY `material_id` (`material_id`);
 
@@ -234,7 +245,6 @@ ALTER TABLE `reports`
 -- Indexes for table `subscriptions`
 --
 ALTER TABLE `subscriptions`
-  ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `subscriptions_tx_ref_unique` (`tx_ref`),
   ADD UNIQUE KEY `subscriptions_transaction_id_unique` (`transaction_id`),
   ADD KEY `subscriptions_user_fk` (`user_id`);
@@ -243,7 +253,6 @@ ALTER TABLE `subscriptions`
 -- Indexes for table `users`
 --
 ALTER TABLE `users`
-  ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `email` (`email`);
 
 --
@@ -253,44 +262,30 @@ ALTER TABLE `users`
 --
 -- AUTO_INCREMENT for table `downloads`
 --
-ALTER TABLE `downloads`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `materials`
 --
-ALTER TABLE `materials`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `password_resets`
 --
-ALTER TABLE `password_resets`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `ratings`
 --
-ALTER TABLE `ratings`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `reports`
 --
-ALTER TABLE `reports`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `subscriptions`
 --
-ALTER TABLE `subscriptions`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
-ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- Constraints for dumped tables
